@@ -1,1 +1,93 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* .container {
+  padding: 60px 0;
+  background-color: rgb(237, 241, 245);
+} */
+
+.row {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #a0b1c5;
+}
+
+.click {
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.link__hover-effect {
+  position: relative;
+  transition: 0.15s;
+}
+
+.link__hover-effect:hover {
+  color: #d3d5f3;
+}
+
+.link__hover-effect:after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  height: 3px;
+  width: 0;
+  right: 0;
+  transition: all 300ms ease;
+  background-color: #fff;
+}
+
+.link__hover-effect:hover:after {
+  left: 0;
+  width: 100%;
+}
+
+.cursor-availability {
+  cursor: not-allowed;
+}
+
+.noresult {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shadow {
+  box-shadow: 0 14px 30px rgba(103, 132, 187, 0.1),
+    0 4px 4px rgba(103, 132, 187, 0.04);
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.showButton {
+  opacity: 1;
+}
+
+.fa-xmarkSrch,
+.dropdown-xmark,
+.dropdown-xmark2,.dropdown-icon {
+  cursor: pointer;
+}

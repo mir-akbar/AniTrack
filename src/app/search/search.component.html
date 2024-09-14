@@ -1,0 +1,108 @@
+<section>
+  <div class="filters">
+    <div class="row filters-row">
+
+      <!-- Search filter -->
+      <div class="filter">
+        <div class="filter-name">Search</div>
+        <div class="search-wrapper shadow">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="dropdown-input" [(ngModel)]="searchQuery" (input)="onSearch()"
+            placeholder="Search...">
+          <i *ngIf="searchQuery" class="fa-solid fa-xmark fa-xmarkSrch" (click)="clearSearch()"></i>
+        </div>
+      </div>
+
+      <div class="filter">
+        <div class="filter-name">Genres</div>
+        <div class="dropdown-container shadow" [class.open]="isGenreDropdownOpen" (click)="toggleGenreDropdown($event)">
+          <input type="text" class="dropdown-input" [(ngModel)]="genreFilter" (input)="onGenreFilterInput()"
+            placeholder="Select genres">
+          <i class="fa-solid fa-xmark dropdown-xmark" *ngIf="selectedGenres.length > 0"
+            (click)="clearGenres($event)"></i>
+          <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+          <ul class="dropdown-list" *ngIf="isGenreDropdownOpen">
+            <li *ngFor="let genre of filteredGenres" (click)="toggleGenre(genre, $event)">
+              {{ genre }}
+              <i class="fa-solid fa-circle-check" [class.show]="isGenreSelected(genre)"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Year filter -->
+      <div class="filter">
+        <div class="filter-name">Year</div>
+        <div class="dropdown-container dropdown-container2 shadow" [class.open]="isYearDropdownOpen"
+          (click)="toggleYearDropdown($event)">
+          <input type="text" class="dropdown-input" [(ngModel)]="yearFilter" (input)="filterYears()"
+            [placeholder]="selectedYear ? selectedYear.toString() : 'Select year...'">
+          <i class="fa-solid fa-xmark dropdown-xmark2" *ngIf="selectedYear" (click)="clearYear($event)"></i>
+          <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+          <ul class="dropdown-list" *ngIf="isYearDropdownOpen">
+            <li *ngFor="let year of filteredYears" (click)="selectYear(year)">
+              {{ year }}
+              <i class="fa-solid fa-circle-check" [class.show]="selectedYear === year"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anime List container -->
+  <div class="container">
+    <div class="row">
+      <!-- Loading State: Show Skeleton Loaders -->
+      <ng-container *ngIf="isLoading">
+        <div class="anime-list">
+          <div class="anime-card" *ngFor="let item of skeletonItems">
+            <ngx-skeleton-loader [theme]="{ 
+                'border-radius': '4px',
+                height: '265px',
+                width: '100%',
+                'background-color': '#d1d5db'
+              }"></ngx-skeleton-loader>
+            <ngx-skeleton-loader [theme]="{
+                'border-radius': '4px',
+                height: '30px',
+                width: '80%',
+                'margin-top': '8px',
+                'background-color': '#d1d5db'
+              }"></ngx-skeleton-loader>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Results Found: Show Anime List -->
+      <ng-container *ngIf="!isLoading && animeList.length > 0">
+        <div class="anime-list">
+          <div class="anime-card" *ngFor="let anime of animeList" (click)="showAnime(anime)">
+            <img [src]="anime.coverImage.large" [alt]="anime.title.english || anime.title.romaji"
+              class="anime__cover-img">
+            <h3 class="anime__title">{{ anime.title.english || anime.title.romaji }}</h3>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- No Results Found: Show No Results Message -->
+      <ng-container *ngIf="!isLoading && animeList.length === 0">
+        <div class="no-results-found">
+          <figure>
+            <img src="/assets/svg-hub-057.svg" class="no-results-icon" alt="No results found">
+          </figure>
+          <div class="no-results-text">
+            No results found...
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- pagination stuff -->
+  <!-- <div class="load-more-container" *ngIf="hasMoreItems && !isLoading">
+    <button (click)="loadMore()" [disabled]="isLoadingMore">
+      {{ isLoadingMore ? 'Loading...' : 'Load More' }}
+    </button>
+  </div> -->
+</section>

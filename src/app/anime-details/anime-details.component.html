@@ -1,0 +1,69 @@
+<div class="section" id="anime-info-main">
+    <div class="anime-wrapper" [class.anime-info-loading]="isLoading">
+      <div *ngIf="anime">
+        <div class="banner" *ngIf="anime.bannerImage" [style.background-image]="'url(' + anime.bannerImage + ')'"></div>
+        <div class="banner no-banner" *ngIf="!anime.bannerImage">No Image found.</div>
+        <div class="content-wrapper">
+          <figure>
+            <img [src]="anime.coverImage.large" class="cover" [alt]="anime.title.english || anime.title.romaji">
+          </figure>
+          <div class="anime_description">
+            <h1 class="anime_desc-title">{{ anime.title.english || anime.title.romaji || anime.title.native }}</h1>
+            <p class="description" [innerHTML]="anime.description || 'No data found.'"></p>
+          </div>
+        </div>
+  
+        <div class="extra-info-wrapper">
+          <div class="extra-info">
+            <div class="info-card-wrapper">
+              <div class="info-card airing-highlight" *ngIf="anime.nextAiringEpisode">
+                <h3 class="info-title">Airing</h3>
+                <p class="info">Ep {{ anime.nextAiringEpisode.episode }}: {{ convertSeconds(anime.nextAiringEpisode.timeUntilAiring) }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Status</h3>
+                <p class="info">{{ anime.status }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Episodes</h3>
+                <p class="info">{{ anime.episodes || 'N/A' }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Episode Duration</h3>
+                <p class="info">{{ anime.duration }} minutes</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Start Date</h3>
+                <p class="info">{{ anime.startDate.year }}/{{ anime.startDate.month }}/{{ anime.startDate.day }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">End Date</h3>
+                <p class="info">{{ getEndDate() }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Studios</h3>
+                <p class="info">{{ getStudioNames() }}</p>
+              </div>
+              <div class="info-card">
+                <h3 class="info-title">Genre</h3>
+                <p class="info">{{ anime.genres.join(', ') }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="character-heading">Characters</div>
+          <div class="character-info-wrapper">
+            <div class="no-data" *ngIf="anime.characters.edges.length === 0">
+              <div>No data found</div>
+            </div>
+            <div class="character-card click" *ngFor="let character of anime.characters.edges.slice(0, 6)">
+              <figure>
+                <img [src]="character.node.image.large" [alt]="character.node.name.full" class="character-image">
+              </figure>
+              <span class="character-name">{{ character.node.name.full }}</span>
+              <span class="role">{{ character.role }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
