@@ -63,6 +63,8 @@ export class AnimeService {
     return this.makeGraphQLRequest(query, variables).pipe(
       map(response => response.data.Page.media.filter((anime: { isAdult: any; }) => !anime.isAdult))
     );
+
+    //pagination stuff
     // return this.apollo.query<any>({
     //   query: SEARCH_ANIME,
     //   variables: {
@@ -153,8 +155,7 @@ export class AnimeService {
 }
 
 
-
-
+//Pagination stuff
 // import { Injectable } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';
 // import { Observable } from 'rxjs';
