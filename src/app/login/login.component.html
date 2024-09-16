@@ -1,0 +1,29 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Login</h2>
+        <p>Enter your credentials to access your account</p>
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" [(ngModel)]="email" required email #emailInput="ngModel">
+                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error-message">
+                    <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                    <div *ngIf="emailInput.errors?.['email']">Please enter a valid email.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" [(ngModel)]="password" required
+                    #passwordInput="ngModel">
+                <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
+                    class="error-message">
+                    <div *ngIf="passwordInput.errors?.['required']">Password is required.</div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="emailInput.invalid || passwordInput.invalid">Login</button>
+        </form>
+        <p class="auth-link">
+            Don't have an account? <a routerLink="/signup">Sign up</a>
+        </p>
+    </div>
+</div>
