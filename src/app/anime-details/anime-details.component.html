@@ -4,9 +4,26 @@
         <div class="banner" *ngIf="anime.bannerImage" [style.background-image]="'url(' + anime.bannerImage + ')'"></div>
         <div class="banner no-banner" *ngIf="!anime.bannerImage">No Image found.</div>
         <div class="content-wrapper">
-          <figure>
-            <img [src]="anime.coverImage.large" class="cover" [alt]="anime.title.english || anime.title.romaji">
-          </figure>
+          <div class="image-action-wrapper">
+            <figure>
+              <img [src]="anime.coverImage.large" class="cover" [alt]="anime.title.english || anime.title.romaji">
+            </figure>
+            <div class="actions">
+              <div class="list">
+                <div class="add">Add to List</div>
+              <div class="dropdown-icon">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <ul class="dropdown-list" style="display: none;">
+                <li>Add to watchlist</li>
+                <li>Add to favourites</li>
+              </ul>
+              </div>
+              <div class="favourite">
+                <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+              </div>
+            </div>
+          </div>
           <div class="anime_description">
             <h1 class="anime_desc-title">{{ anime.title.english || anime.title.romaji || anime.title.native }}</h1>
             <p class="description" [innerHTML]="anime.description || 'No data found.'"></p>
