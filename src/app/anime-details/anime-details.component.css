@@ -271,6 +271,10 @@
         flex: 0 0 50%;
         margin-bottom: 15px;
     }
+
+    .character-info-wrapper{
+        grid-template-columns: repeat(4, minmax(100px, 1fr));
+    }
     
     .character-heading {
         padding-top: 15px;
